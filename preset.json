@@ -3,13 +3,10 @@
   "packageManager": "yarn",
   "useTaobaoRegistry": true,
   "cssPreprocessor": "less",
-  "router": false,
-  "vuex": false,
-  "routerHistoryMode": false,
+  "router": true,
+  "vuex": true,
+  "routerHistoryMode": true,
   "plugins": {
-    "@vue/cli-plugin-babel": {},
-    "vue-cli-plugin-qrcode": {
-      "version": "*"
-    }
+    "@vue/cli-plugin-babel": {}
   }
 }

@@ -4,15 +4,15 @@
  * @date    2019-04-29 09:31
  * @version $ IIFE
  */
-const pcUI = [
+const pcUI2 = [
   {
     name: 'Element UI',
     value: 'element-ui'
   },
-  {
-    name: 'ant-design-vue',
-    value: 'ant'
-  },
+  // {
+  //   name: 'ant-design-vue',
+  //   value: 'ant'
+  // },
   {
     name: 'none',
     value: 'none'
@@ -20,15 +20,18 @@ const pcUI = [
 ];
 
 // 没有用vue3实现
-const pcUI2 = [
-  ...pcUI,
+const pcUI3 = [
   {
-    name: 'h_ui',
-    value: 'hui'
+    name: 'Element Plus',
+    value: 'element-plus'
   },
+  // {
+  //   name: 'iView',
+  //   value: 'iview'
+  // },
   {
-    name: 'iView',
-    value: 'iview'
+    name: 'none',
+    value: 'none'
   }
 ];
 
@@ -45,10 +48,6 @@ module.exports = [
       {
         name: 'Vue 3',
         value: 'v3'
-      },
-      {
-        name: 'miniprogram',
-        value: 'mini'
       }
     ],
     default: 'v2'
@@ -57,7 +56,6 @@ module.exports = [
     name: 'language',
     type: 'list',
     message: 'Choose whether your develop language is a JS or TS(default:JS)',
-    when: (answers) => answers.preset !== 'mini',
     choices: [
       {
         name: 'JS',
@@ -71,17 +69,9 @@ module.exports = [
     default: 'js'
   },
   {
-    name: 'build-tools',
-    type: 'confirm',
-    message: 'Whether you need to add the build tool Vite?',
-    when: (answers) => answers.preset === 'v2',
-    initial: true
-  },
-  {
     name: 'application',
     type: 'list',
     message: 'Choose whether your app is a PC or a mobile(default:mobile)',
-    when: (answers) => answers.preset !== 'mini',
     choices: [
       {
         name: 'PC',
@@ -91,46 +81,15 @@ module.exports = [
         name: 'mobile',
         value: 'mobile'
       },
-      {
-        name: 'H5离线包',
-        value: 'offline'
-      }
     ],
-    default: 'mobile'
-  },
-  {
-    name: 'offline-id',
-    type: 'input',
-    message: 'Fill in the offline package ID',
-    validate: function (val) {
-      return /^[0-9a-z]{4,8}$/.test(val)
-        ? true
-        : '请输入4-8位的小写英文字母或数字，注意唯一性';
-    },
-    when: (answers) =>
-      answers.preset !== 'mini' && answers.application === 'offline',
-    default: '离线包 ID'
-  },
-  {
-    name: 'offline-name',
-    type: 'input',
-    message: 'Fill in the offline package name',
-    validate: function (val) {
-      return /^[\u4e00-\u9fa5a-zA-Z0-9]{1,10}$/.test(val)
-        ? true
-        : '请输入1-10位的中英文字符或数字';
-    },
-    when: (answers) =>
-      answers.preset !== 'mini' && answers.application === 'offline',
-    default: '离线包中文描述'
+    default: 'pc'
   },
   {
     name: 'ui-framework',
     type: 'list',
     message: 'Choice UI Framework(default:none)',
-    choices: (answers) => (answers.preset === 'v2' ? pcUI2 : pcUI),
-    when: (answers) =>
-      answers.preset !== 'mini' && answers.application === 'pc',
+    choices: (answers) => (answers.preset === 'v2' ? pcUI2 : pcUI3),
+    when: (answers) => answers.application === 'pc',
     default: 'none'
   },
   {
@@ -147,40 +106,7 @@ module.exports = [
         value: 'none'
       }
     ],
-    when: (answers) =>
-      answers.preset !== 'mini' &&
-      (answers.application === 'mobile' || answers.application === 'offline'),
+    when: (answers) => answers.application === 'mobile',
     default: 'none'
   },
-  {
-    name: 'version-control',
-    type: 'list',
-    message: 'Choice the Version control tool(default:svn)?',
-    choices: [
-      {
-        name: 'SVN',
-        value: 'svn'
-      },
-      {
-        name: 'Git',
-        value: 'git'
-      }
-    ],
-    default: 'svn'
-  },
-  {
-    name: 'mirror-source',
-    type: 'confirm',
-    message: 'Whether it is an internal project of the company?',
-    when: (answers) => answers.preset !== 'mini',
-    initial: true
-  },
-  {
-    name: 'see-package',
-    type: 'confirm',
-    message: 'Whether to support the generation of see platform publications?',
-    when: (answers) =>
-      answers.preset !== 'mini' && answers['mirror-source'] === true,
-    initial: true
-  }
 ];
