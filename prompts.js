@@ -50,7 +50,7 @@ module.exports = [
         value: 'v3'
       }
     ],
-    default: 'v2'
+    default: 'v3'
   },
   {
     name: 'language',
