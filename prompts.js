@@ -45,10 +45,6 @@ module.exports = [
       {
         name: 'Vue 3',
         value: 'v3'
-      },
-      {
-        name: 'miniprogram',
-        value: 'mini'
       }
     ],
     default: 'v2'
